@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.db
+*.xlsx
+*.pdf
+*.html
+*.log
+leads_tracker.csv
+pt_students.csv
+mts_executive_report.csv
+raw_transactions.csv
