@@ -1,5 +1,6 @@
+import sqlite3
 import unittest
-from de_etl_lab import make_lead_hash, normalize_code
+from de_etl_lab import load_dimension_scd2, make_lead_hash, normalize_code
 
 
 class TestMTSDataPipeline(unittest.TestCase):
@@ -16,6 +17,15 @@ class TestMTSDataPipeline(unittest.TestCase):
         self.assertEqual(h1, h2)
         self.assertNotEqual(h1, h3)
         self.assertEqual(len(h1), 16)
+
+    def test_scd2_schema_creates_in_memory_warehouse(self):
+        conn = sqlite3.connect(":memory:")
+        codes = load_dimension_scd2(conn)
+        cur = conn.cursor()
+        cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='dim_equipment_scd2'")
+        self.assertIsNotNone(cur.fetchone())
+        self.assertIsInstance(codes, set)
+        conn.close()
 
 
 if __name__ == "__main__":
