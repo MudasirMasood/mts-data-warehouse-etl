@@ -1,48 +1,44 @@
 import os
 import subprocess
 import sys
-from datetime import datetime
-
-
-def run_script(script_name):
-    if os.path.exists(script_name):
-        subprocess.run([sys.executable, script_name])
-    else:
-        print(f"\n[ERROR] '{script_name}' not found in {os.getcwd()}.")
+import webbrowser
+import time
 
 
 def main():
     while True:
-        now_str = datetime.now().strftime("%A, %d %b %Y | %I:%M %p")
-        print("\n" + "=" * 64)
-        print("   MUHAMMAD MUDASIR MASOOD — DAILY BUSINESS COMMAND CENTER")
-        print(f"   {now_str}")
-        print("=" * 64)
-        print("  1. MTS Express Hospital Quote Generator  (hospital_quote.py)")
-        print("  2. MTS Doctor Leads & 3-Day Follow-Ups   (leads_manager.py)")
-        print("  3. PPRA & Hospital Tender Scanner        (tender_finder.py)")
-        print("  4. Gym Personal Training Fee Reminders   (gym_reminders.py)")
-        print("  5. MTS Data Warehouse & SQL Analytics    (de_etl_lab.py)")
-        print("  6. Exit")
-        print("=" * 64)
+        print("\n" + "=" * 54)
+        print("   MTS & DATA ENGINEERING MASTER COMMAND CENTER")
+        print("=" * 54)
+        print("1. Generate Hospital Equipment Quote (hospital_quote.py)")
+        print("2. 3-Day Doctor Follow-Ups & CRM (leads_manager.py)")
+        print("3. Scan PPRA Medical Tenders (tender_finder.py)")
+        print("4. Gym PT Fee Reminders (gym_reminders.py)")
+        print("5. Run Data Warehouse CI/CD ETL (run_pipeline_ci.py)")
+        print("6. Launch 24/7 AI Receptionist Server (ai_receptionist.py)")
+        print("0. Exit")
+        print("=" * 54)
 
-        choice = input("Select an operation (1-6): ").strip()
-
+        choice = input("Select an option (0-6): ").strip()
         if choice == "1":
-            run_script("hospital_quote.py")
+            subprocess.run([sys.executable, "hospital_quote.py"])
         elif choice == "2":
-            run_script("leads_manager.py")
+            subprocess.run([sys.executable, "leads_manager.py"])
         elif choice == "3":
-            run_script("tender_finder.py")
+            subprocess.run([sys.executable, "tender_finder.py"])
         elif choice == "4":
-            run_script("gym_reminders.py")
+            subprocess.run([sys.executable, "gym_reminders.py"])
         elif choice == "5":
-            run_script("de_etl_lab.py")
+            subprocess.run([sys.executable, "run_pipeline_ci.py"])
         elif choice == "6":
-            print("\nHave a productive day! Closing Command Center.")
+            print("\nStarting 24/7 AI Receptionist at http://127.0.0.1:8000 (Press Ctrl+C to stop)...")
+            webbrowser.open("http://127.0.0.1:8000")
+            subprocess.run([sys.executable, "-m", "uvicorn", "ai_receptionist:app", "--reload"])
+        elif choice == "0":
+            print("Exiting Master Command Center.")
             break
         else:
-            print("\nInvalid option. Please enter 1, 2, 3, 4, 5, or 6.")
+            print("Invalid option. Please enter 0-6.")
 
 
 if __name__ == "__main__":
